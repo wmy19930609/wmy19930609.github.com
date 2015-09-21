@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "关于jekyll安装失败问题"
+date:   2015-9-21 17:00:00
+categories: 其他
+---
+
+国内rubygems.org被屏蔽了，更换镜像地址
+

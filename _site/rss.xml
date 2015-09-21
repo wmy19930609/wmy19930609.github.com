@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+  <channel>
+    <title>MyBlog</title>
+    <link>blog url</link>
+    <description>Blogging about stuffs</description>
+    <pubDate>Tue, 22 Sep 2015 01:00:00 +0800</pubDate>
+    <item>
+      <title>关于jekyll安装失败问题</title>
+      <link>blog url/%E5%85%B6%E4%BB%96/2015/09/22/first.html</link>
+      <description>&lt;p&gt;国内rubygems.org被屏蔽了，更换镜像地址&lt;/p&gt;
+</description>
+      <pubDate>Tue, 22 Sep 2015 01:00:00 +0800</pubDate>
+      <dc:date>2015-09-22T01:00:00+08:00</dc:date>
+    </item>
+    <item>
+      <title>js练习</title>
+      <link>blog url/hello/2013/11/10/hello.html</link>
+      <description>&lt;p&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/8522841/9985464/0f021a42-605f-11e5-9d9a-68f4704bb22b.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+</description>
+      <pubDate>Sun, 10 Nov 2013 18:18:00 +0800</pubDate>
+      <dc:date>2013-11-10T18:18:00+08:00</dc:date>
+    </item>
+    <dc:date>2015-09-22T01:00:00+08:00</dc:date>
+  </channel>
+</rss>
