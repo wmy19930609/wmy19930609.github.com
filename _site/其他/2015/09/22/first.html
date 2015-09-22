@@ -62,11 +62,13 @@
 <a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">搭建一个免费的，无限流量的Blog</a></p>
 
 <p>1、ruby
-默认情况下，Mac OS X 系统已经安装好 Ruby（最新的 Mavericks 随机的 Ruby 版本为 2.0.0p247），安装在 /System/Library/Frameworks/Ruby.framework/Versions/Current  目录下。
+默认情况下，Mac OS X 系统已经安装好 Ruby（最新的 Mavericks 随机的 Ruby 版本为 2.0.0p247），安装在 
+/System/Library/Frameworks/Ruby.framework/Versions/Current  目录下。
 可以根据命令ruby --version查看</p>
 
-<p>2、安装brew
-ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</p>
+<p>2、安装brew</p>
+
+<p>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</p>
 
 <p>3、安装jekyll
 gem install jekyll</p>
@@ -76,7 +78,7 @@ gem install jekyll</p>
 Unable to download data from https://rubygems.org/ - Errno::ECONNRESET: Connection reset by peer - SSL<em>connect (https://rubygems.org/latest</em>specs.4.8.gz)</em></strong></p>
 
 <p>问题原因：
-安装失败，是连不上源，国内rubygems.org被屏蔽了，更换镜像地址,所有指向rubygems的地址全换成淘宝的就好了
+安装失败，是连不上源，国内rubygems.org被屏蔽了，更换镜像地址，所有指向rubygems的地址全换成淘宝的就好了
 替换gem的sources：</p>
 
 <blockquote>
