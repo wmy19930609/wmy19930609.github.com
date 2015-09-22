@@ -22,7 +22,7 @@
     <header class="main-header post-head no-cover">
     <nav class="main-nav  clearfix">
         <a class="back-button icon-arrow-left" href="/">Home</a>
-        <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a>
+        <!-- <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a> -->
     </nav>
 </header>
 
@@ -58,7 +58,38 @@
         <!-- <h1 class="post-title">关于jekyll安装失败问题</h1> -->
 
         <section class="post-content">
-            <p>国内rubygems.org被屏蔽了，更换镜像地址</p>
+            <p>jekyll是什么：
+<a href="http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html">搭建一个免费的，无限流量的Blog</a></p>
+
+<p>1、ruby
+默认情况下，Mac OS X 系统已经安装好 Ruby（最新的 Mavericks 随机的 Ruby 版本为 2.0.0p247），安装在 /System/Library/Frameworks/Ruby.framework/Versions/Current  目录下。
+可以根据命令ruby --version查看</p>
+
+<p>2、安装brew
+ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</p>
+
+<p>3、安装jekyll
+gem install jekyll</p>
+
+<p>这时就出现了错误：
+<strong><em>ERROR: Could not find a valid gem &#39;jekyll&#39; (&gt;= 0), here is why:
+Unable to download data from https://rubygems.org/ - Errno::ECONNRESET: Connection reset by peer - SSL<em>connect (https://rubygems.org/latest</em>specs.4.8.gz)</em></strong></p>
+
+<p>问题原因：
+安装失败，是连不上源，国内rubygems.org被屏蔽了，更换镜像地址,所有指向rubygems的地址全换成淘宝的就好了
+替换gem的sources：</p>
+
+<blockquote>
+<p>sudo gem sources --remove http://rubygems.org/
+sudo gem sources -a http://ruby.taobao.org/</p>
+</blockquote>
+
+<p>之后再运行 sudo gem install jekyll就可以啦~</p>
+
+<p>如果还有其他问题，可参考链接：
+<a href="http://pathof.me/2014/02/26/jekyll-setup.html">jekyll安装问题</a></p>
+
+<p>附上官方文档的<a href="http://jekyllrb.com/docs/installation/">安装教程</a>和<a href="http://jekyllrb.com/docs/usage/">使用教程</a></p>
 
         </section>
 

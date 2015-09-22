@@ -1,6 +1,6 @@
 name: MyBlog
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+description: Step by Step
+meta_description: "share"
 
 markdown: redcarpet
 highlighter: pygments

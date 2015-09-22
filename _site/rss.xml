@@ -12,18 +12,11 @@
     <item>
       <title>关于jekyll安装失败问题</title>
       <link>blog url/%E5%85%B6%E4%BB%96/2015/09/22/first.html</link>
-      <description>&lt;p&gt;国内rubygems.org被屏蔽了，更换镜像地址&lt;/p&gt;
+      <description>&lt;p&gt;jekyll是什么：
+&lt;a href=&quot;http://www.ruanyifeng.com/blog/2012/08/blogging_with_jekyll.html&quot;&gt;搭建一个免费的，无限流量的Blog&lt;/a&gt;&lt;/p&gt;
 </description>
       <pubDate>Tue, 22 Sep 2015 01:00:00 +0800</pubDate>
       <dc:date>2015-09-22T01:00:00+08:00</dc:date>
-    </item>
-    <item>
-      <title>js练习</title>
-      <link>blog url/hello/2013/11/10/hello.html</link>
-      <description>&lt;p&gt;js练习题&lt;/p&gt;
-</description>
-      <pubDate>Sun, 10 Nov 2013 18:18:00 +0800</pubDate>
-      <dc:date>2013-11-10T18:18:00+08:00</dc:date>
     </item>
     <dc:date>2015-09-22T01:00:00+08:00</dc:date>
   </channel>
