@@ -11,6 +11,3 @@ title: About me
 
 
 ***正在学习的小胖鸟***
-
-
-:bowtie::bowtie::bowtie:
