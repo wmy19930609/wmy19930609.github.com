@@ -3,4 +3,14 @@ layout: page
 title: About me 
 ---
 
-This is a static page. It could be an 'about page' if you'd like.
+***爱唱歌***
+[去听听啊](http://y.qq.com/kg/?s=gP9n63enbFyD)
+
+
+***爱讲笑话***
+
+
+***正在学习的小胖鸟***
+
+
+:bowtie::bowtie::bowtie:
