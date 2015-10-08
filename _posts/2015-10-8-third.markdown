@@ -1,0 +1,58 @@
+---
+layout: post
+title:  "移动端开发总结"
+date:   2015-10-8 14:30:00
+categories: css 移动
+---
+做了一个timetable，里面有一些小技巧保留一下~
+
+
+1、在ios中，select的原有的样式如下：
+
+![image](http://imgtest-dl.meiliworks.com/img/_o/9f/3e/cf2010452863c77dad4b8e865478_516_106.ch.jpg)
+
+当我们人为增加select样式的时候，很多样式是增加不了的，如果想改变大小，只能通过font-size来改变，并且这个改变只到一定px就不再增加。那么改变样式该怎么办呢？
+
+只需要在select外面包一层父元素，然后让select定位并且透明度为0，得到select的选中值：select.options[index].text，将值复制给父元素中的span或者其他元素显示即可。这时点击span元素，既可以调用select的事件，又可以增加样式，是不是很酷呢^_^？
+
+
+
+2、当页面有表单输入元素的时候，有些样式的position: fixed失效
+
+情景是这样的：
+![image](https://cloud.githubusercontent.com/assets/8522841/10359738/e9b495d6-6dcd-11e5-91e7-3343109db0e3.png)
+在ios中，当点击select之后，本来应该在视窗最上面的元素，位置向下，fixed失效，安卓不会。
+
+解决方案：
+
+```javascript
+$('.select').onfocus = function(){
+	$('.parent').style.position = 'absolute';
+};
+$('.select').onblur = function(){
+	$('.parent').style.position = 'fixed';
+};
+```
+在给html加一个position: relative;
+
+
+3、icon
+ios中添加图标到屏幕里的有两种属性值apple-touch-icon和apple-touch-icon-precomposed，区别就在于是否会应用iOS中自动给图标添加的那层高光。后者可以去掉高光。
+
+```javascript
+<link rel="apple-touch-icon-precomposed" href="./img/favicon.ico" />
+```
+
+添加网址前面出现的icon
+
+```javascript
+<link rel="shortcut icon"  href="./img/favicon.ico" />
+```
+
+4、-webkit-tap-highlight-color:rgba(255,255,255,0)可以同时屏蔽ios和android下点击元素时出现的阴影。备注：transparent的属性值在android下无效。
+
+5、[其他](http://blog.163.com/hsb001_mobile/blog/static/15524028020111177221254/)
+
+
+
+

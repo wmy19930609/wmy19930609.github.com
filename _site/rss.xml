@@ -8,7 +8,15 @@
     <title>MyBlog</title>
     <link>blog url</link>
     <description>one step at a time</description>
-    <pubDate>Tue, 29 Sep 2015 04:00:00 +0800</pubDate>
+    <pubDate>Thu, 08 Oct 2015 22:30:00 +0800</pubDate>
+    <item>
+      <title>移动端开发总结</title>
+      <link>blog url/css/%E7%A7%BB%E5%8A%A8/2015/10/08/third.html</link>
+      <description>&lt;p&gt;做了一个timetable，里面有一些小技巧保留一下~&lt;/p&gt;
+</description>
+      <pubDate>Thu, 08 Oct 2015 22:30:00 +0800</pubDate>
+      <dc:date>2015-10-08T22:30:00+08:00</dc:date>
+    </item>
     <item>
       <title>一些常用的判断</title>
       <link>blog url/js/2015/09/29/second.html</link>
@@ -26,6 +34,6 @@
       <pubDate>Tue, 22 Sep 2015 01:00:00 +0800</pubDate>
       <dc:date>2015-09-22T01:00:00+08:00</dc:date>
     </item>
-    <dc:date>2015-09-29T04:00:00+08:00</dc:date>
+    <dc:date>2015-10-08T22:30:00+08:00</dc:date>
   </channel>
 </rss>
