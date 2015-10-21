@@ -1,0 +1,103 @@
+---
+layout: post
+title:  "移动端开发总结"
+date:   2015-10-21 14:45:00
+categories: css
+---
+document.body.scrollTop   document.documentElement.scrollTop
+
+火狐、谷歌、IE关于document.body.scrollTop和document.documentElement.scrollTop 以及值为0的问题
+
+一、先遇到document.body.scrollTop值为0的问题
+
+做页面的时候可能会用到位置固定的层,读取document.body.scrollTop来设置层的位置,像这样,
+
+
+    window.onscroll=function () {
+        var oId=document.getElementByIdx_x("id");
+        oId.style.top=document.body.scrollTop+"px";
+    }
+
+    可是怎么没有达到预期效果呢,输出document.body.scrollTop的值一看,一直都是0——原来是DTD的问题,要是页面直接用开头的话就没有问题了.但是要符合web标准,DTD当然是不能少的.使用DTD时用document.documentElement.scrollTop代替document.body.scrollTop就可以了
+```javascript
+    window.onscroll=function () {
+        var oId=document.getElementByIdx_x("id");
+        oId.style.top=document.documentElement.scrollTop+"px";
+    }
+    或者用函数来解决：
+    function get_scrollTop_of_body(){ 
+        var scrollTop; 
+        if(typeof window.pageYOffset != 'undefined'){//pageYOffset指的是滚动条顶部到网页顶部的距离
+            scrollTop = window.pageYOffset; 
+        }else if(typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat')        { 
+            scrollTop = document.documentElement.scrollTop; 
+        }else if(typeof document.body != 'undefined'){ 
+            scrollTop = document.body.scrollTop; 
+        } 
+        return scrollTop; 
+    }
+```
+注：IE对盒模型的渲染在 Standards Mode和Quirks Mode是有很大差别的，在Standards Mode下对于盒模型的解释和其他的标准浏览器是一样，但在Quirks Mode模式下则有很大差别，而在不声明Doctype的情况下，IE默认又是Quirks Mode。所以为兼容性考虑，我们可能需要获取当前的文档渲染方式。 
+    document.compatMode正好派上用场，它有两种可能的返回值：BackCompat和CSS1Compat，对其解释如下： 
+    BackCompat： Standards-compliant mode is not switched on. (Quirks Mode) 
+    CSS1Compat： Standards-compliant mode is switched on. (Standards Mode) 
+    在实际的项目中，我们还需要在获取浏览是否IE，这样就可以得到IE的渲染模式了。
+    当文档有了标准声明时， document.compatMode 的值就等于 "CSS1compat"， 因此，我们可以根据 document.compatMode 的值来判断文档是否加了标准声明： 
+    var height = document.compatMode=="CSS1Compat" ? document.documentElement.clientHeight : document.body.clientHeight; 
+二、再次遇到谷歌浏览器不支持document.documentElement.scrollTop，值0的问题
+信息显示浮动层时，IE、Firefox下都能显示正常，但Chrome下出现了浮动层永远显示在上面，经过仔细分析，发现Chrome对document.documentElement.scrollTop的识别会出现误差。不过加上document.body.scrollTop后，则显示正常。
+  由于document.documentElement.scrollTop和document.body.scrollTop在标准模式或者是奇怪模式下都只有一个会返回有效的值，所以都加上也不会有问题（看来上面的问题是Chrome可能把文档当作非标准文档来解析了）。
+  即获取高度时使用document.documentElement.scrollTop+document.body.scrollTop，经测试，代码在IE、Firefox、Chrome下都能显示正常了。
+三、浏览器兼容模式
+
+对于document.compatMode，很多朋友可能都根我一样很少接触，知道他的存在却不清楚他的用途。今天在ext中看到 document.compatMode的使用，感觉这个对于我们开发兼容性的web页面还是很有帮助，我们都知道，IE对盒模型的渲染在 Standards Mode和Quirks Mode是有很大差别的，在Standards Mode下对于盒模型的解释和其他的标准浏览器是一样，但在Quirks Mode模式下则有很大差别，而在不声明Doctype的情况下，IE默认又是Quirks Mode。所以为兼容性考虑，我们可能需要获取当前的文档渲染方式。 
+      document.compatMode正好派上用场，它有两种可能的返回值：BackCompat和CSS1Compat，对其解释如下： 
+BackCompat Standards-compliant mode is not switched on. (Quirks Mode) 
+CSS1Compat Standards-compliant mode is switched on. (Standards Mode) 
+
+    在实际的项目中，我们还需要在获取浏览是否IE，这样就可以得到IE的渲染模式了。在Ext中的代码：isBorderBox=isIE&&!isStrict。 
+
+
+
+当文档有了标准声明时， document.compatMode 的值就等于 "CSS1compat"， 因此， 我们可以根据 document.compatMode 的值来判断文档是否加了标准声明
+
+var height = document.compatMode=="CSS1Compat" ? document.documentElement.clientHeight : document.body.clientHeight;
+
+==========================模式应用===========================
+
+document.compatMode:获取当前浏览器采用的渲染方式。 
+
+主要是浏览器的模式，有两个：BackCompat，CSS1Compat。其中前者是怪异模式，后者是标准模式。 
+
+IE默认是BackCompat模式，Gecko内核的浏览器只在table中图片层上不同，可以看为CSS1Compat标准模式 
+
+document.compatMode等于BackCompat时，浏览器客户区宽度是document.body.clientWidth； 
+当document.compatMode等于CSS1Compat时，浏览器客户区宽度是document.documentElement.clientWidth。 
+
+浏览器客户区高度、滚动条高度、滚动条的Left、滚动条的Top等等都是上面的情况。 
+
+一个准确获取网页客户区的宽高、滚动条宽高、滚动条Left和Top的代码： 
+```javascript
+if (document.compatMode == \"BackCompat\") { 
+	cWidth = document.body.clientWidth; 
+	cHeight = document.body.clientHeight; 
+	sWidth = document.body.scrollWidth; 
+	sHeight = document.body.scrollHeight; 
+	sLeft = document.body.scrollLeft; 
+	sTop = document.body.scrollTop; 
+} 
+else { 
+//document.compatMode == \"CSS1Compat\" 
+	cWidth = document.documentElement.clientWidth; 
+	cHeight = document.documentElement.clientHeight; 
+	sWidth = document.documentElement.scrollWidth; 
+	sHeight = document.documentElement.scrollHeight; 
+	sLeft = document.documentElement.scrollLeft == 0 ? document.body.scrollLeft : document.documentElement.scrollLeft;
+	sTop = document.documentElement.scrollTop == 0 ? document.body.scrollTop : document.documentElement.scrollTop;
+} 
+```
+（以上代码兼容目前流行的全部浏览器，包括：IE、Firefox、Safari、Opera、Chrome）
+
+
+
+
