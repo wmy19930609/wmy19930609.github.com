@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>MyBlog - one step at a time</title>
+    <meta name="description" content="share" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+
+</head>
+<body class="post-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <!-- <a class="subscribe-button icon-feed" href="/rss.xml">Subscribe</a> -->
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">scrollTop</h1>
+            <section class="post-meta">                
+                <time class="post-date" datetime="2015-10-21">21 Oct 2015</time>
+                 
+                    on css 
+                
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="blog url">
+                
+                    <span class="blog-title">MyBlog</span>
+                 
+            </a>
+        </header> -->
+        
+        <!-- <span class="post-meta">
+            <time datetime="2015-10-21">21 Oct 2015</time>
+             
+                on css 
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">scrollTop</h1> -->
+
+        <section class="post-content">
+            <p>document.body.scrollTop   document.documentElement.scrollTop</p>
+
+<p>火狐、谷歌、IE关于document.body.scrollTop和document.documentElement.scrollTop 以及值为0的问题</p>
+
+<p>一、先遇到document.body.scrollTop值为0的问题</p>
+
+<p>做页面的时候可能会用到位置固定的层,读取document.body.scrollTop来设置层的位置,像这样,</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">window.onscroll=function () {
+    var oId=document.getElementByIdx_x(&quot;id&quot;);
+    oId.style.top=document.body.scrollTop+&quot;px&quot;;
+}
+
+可是怎么没有达到预期效果呢,输出document.body.scrollTop的值一看,一直都是0——原来是DTD的问题,要是页面直接用开头的话就没有问题了.但是要符合web标准,DTD当然是不能少的.使用DTD时用document.documentElement.scrollTop代替document.body.scrollTop就可以了
+</code></pre></div><div class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="nb">window</span><span class="p">.</span><span class="nx">onscroll</span><span class="o">=</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">oId</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementByIdx_x</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">);</span>
+        <span class="nx">oId</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="o">+</span><span class="s2">&quot;px&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="err">或者用函数来解决：</span>
+    <span class="kd">function</span> <span class="nx">get_scrollTop_of_body</span><span class="p">(){</span> 
+        <span class="kd">var</span> <span class="nx">scrollTop</span><span class="p">;</span> 
+        <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">){</span><span class="c1">//pageYOffset指的是滚动条顶部到网页顶部的距离</span>
+            <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">pageYOffset</span><span class="p">;</span> 
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">document</span><span class="p">.</span><span class="nx">compatMode</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">&amp;&amp;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">compatMode</span> <span class="o">!=</span> <span class="s1">&#39;BackCompat&#39;</span><span class="p">)</span>        <span class="p">{</span> 
+            <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">;</span> 
+        <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span> <span class="o">!=</span> <span class="s1">&#39;undefined&#39;</span><span class="p">){</span> 
+            <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">;</span> 
+        <span class="p">}</span> 
+        <span class="k">return</span> <span class="nx">scrollTop</span><span class="p">;</span> 
+    <span class="p">}</span>
+</code></pre></div>
+<p>注：IE对盒模型的渲染在 Standards Mode和Quirks Mode是有很大差别的，在Standards Mode下对于盒模型的解释和其他的标准浏览器是一样，但在Quirks Mode模式下则有很大差别，而在不声明Doctype的情况下，IE默认又是Quirks Mode。所以为兼容性考虑，我们可能需要获取当前的文档渲染方式。 
+    document.compatMode正好派上用场，它有两种可能的返回值：BackCompat和CSS1Compat，对其解释如下： 
+    BackCompat： Standards-compliant mode is not switched on. (Quirks Mode) 
+    CSS1Compat： Standards-compliant mode is switched on. (Standards Mode) 
+    在实际的项目中，我们还需要在获取浏览是否IE，这样就可以得到IE的渲染模式了。
+    当文档有了标准声明时， document.compatMode 的值就等于 &quot;CSS1compat&quot;， 因此，我们可以根据 document.compatMode 的值来判断文档是否加了标准声明： 
+    var height = document.compatMode==&quot;CSS1Compat&quot; ? document.documentElement.clientHeight : document.body.clientHeight; 
+二、再次遇到谷歌浏览器不支持document.documentElement.scrollTop，值0的问题
+信息显示浮动层时，IE、Firefox下都能显示正常，但Chrome下出现了浮动层永远显示在上面，经过仔细分析，发现Chrome对document.documentElement.scrollTop的识别会出现误差。不过加上document.body.scrollTop后，则显示正常。
+  由于document.documentElement.scrollTop和document.body.scrollTop在标准模式或者是奇怪模式下都只有一个会返回有效的值，所以都加上也不会有问题（看来上面的问题是Chrome可能把文档当作非标准文档来解析了）。
+  即获取高度时使用document.documentElement.scrollTop+document.body.scrollTop，经测试，代码在IE、Firefox、Chrome下都能显示正常了。
+三、浏览器兼容模式</p>
+
+<p>对于document.compatMode，很多朋友可能都根我一样很少接触，知道他的存在却不清楚他的用途。今天在ext中看到 document.compatMode的使用，感觉这个对于我们开发兼容性的web页面还是很有帮助，我们都知道，IE对盒模型的渲染在 Standards Mode和Quirks Mode是有很大差别的，在Standards Mode下对于盒模型的解释和其他的标准浏览器是一样，但在Quirks Mode模式下则有很大差别，而在不声明Doctype的情况下，IE默认又是Quirks Mode。所以为兼容性考虑，我们可能需要获取当前的文档渲染方式。 
+      document.compatMode正好派上用场，它有两种可能的返回值：BackCompat和CSS1Compat，对其解释如下： 
+BackCompat Standards-compliant mode is not switched on. (Quirks Mode) 
+CSS1Compat Standards-compliant mode is switched on. (Standards Mode) </p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">在实际的项目中，我们还需要在获取浏览是否IE，这样就可以得到IE的渲染模式了。在Ext中的代码：isBorderBox=isIE&amp;&amp;!isStrict。 
+</code></pre></div>
+<p>当文档有了标准声明时， document.compatMode 的值就等于 &quot;CSS1compat&quot;， 因此， 我们可以根据 document.compatMode 的值来判断文档是否加了标准声明</p>
+
+<p>var height = document.compatMode==&quot;CSS1Compat&quot; ? document.documentElement.clientHeight : document.body.clientHeight;</p>
+
+<p>==========================模式应用===========================</p>
+
+<p>document.compatMode:获取当前浏览器采用的渲染方式。 </p>
+
+<p>主要是浏览器的模式，有两个：BackCompat，CSS1Compat。其中前者是怪异模式，后者是标准模式。 </p>
+
+<p>IE默认是BackCompat模式，Gecko内核的浏览器只在table中图片层上不同，可以看为CSS1Compat标准模式 </p>
+
+<p>document.compatMode等于BackCompat时，浏览器客户区宽度是document.body.clientWidth； 
+当document.compatMode等于CSS1Compat时，浏览器客户区宽度是document.documentElement.clientWidth。 </p>
+
+<p>浏览器客户区高度、滚动条高度、滚动条的Left、滚动条的Top等等都是上面的情况。 </p>
+
+<p>一个准确获取网页客户区的宽高、滚动条宽高、滚动条Left和Top的代码： 
+<code>javascript
+if (document.compatMode == \&quot;BackCompat\&quot;) { 
+    cWidth = document.body.clientWidth; 
+    cHeight = document.body.clientHeight; 
+    sWidth = document.body.scrollWidth; 
+    sHeight = document.body.scrollHeight; 
+    sLeft = document.body.scrollLeft; 
+    sTop = document.body.scrollTop; 
+} 
+else { 
+//document.compatMode == \&quot;CSS1Compat\&quot; 
+    cWidth = document.documentElement.clientWidth; 
+    cHeight = document.documentElement.clientHeight; 
+    sWidth = document.documentElement.scrollWidth; 
+    sHeight = document.documentElement.scrollHeight; 
+    sLeft = document.documentElement.scrollLeft == 0 ? document.body.scrollLeft : document.documentElement.scrollLeft;
+    sTop = document.documentElement.scrollTop == 0 ? document.body.scrollTop : document.documentElement.scrollTop;
+} 
+</code>
+（以上代码兼容目前流行的全部浏览器，包括：IE、Firefox、Safari、Opera、Chrome）</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">wmy's Picture</span></a>
+                </figure>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> wmy </h4>
+                    <!-- Author Bio -->
+                   <!--  <p> 
+                        Here goes the author description. You might want to place some links too in here
+                    </p> -->
+                </section>                
+            
+
+            <!-- Share links section -->
+            <!-- <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=scrollTop&amp;url=http://yourblog-domain.com/css/2015/10/21/forth.html"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yourblog-domain.com/css/2015/10/21/forth.html"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yourblog-domain.com/css/2015/10/21/forth.html"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section> -->
+            
+            <!-- Disqus comments -->
+            <!--  -->
+            
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">MyBlog</a> &copy; 
+               &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using 
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+    
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>   
+</body>
+</html>
