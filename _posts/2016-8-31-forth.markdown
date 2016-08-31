@@ -6,6 +6,55 @@ categories: git
 ---
 今天发工资了<(￣︶￣)>
 
+总结几个可能会用到的git命令：
+
+*git config --global credential.helper store*
+
+>使用https地址时会出现让重复输入用户名和密码的情况，使用这个命令可以保存用户名和密码，但是就是有个问题，你的用户名和密码都是明文的，
+那么，问题来了●﹏●，你，就泄密了！
+
+>咳咳，多么高大上的字眼，你泄密了！还乐呢啊~没救了(￣へ￣)
+
+来，教你怎么看用户名和密码,密码decode一下就行了：
+
+```javascript
+cat ~/.git-credentials
+```
+
+修改保存的用户名和密码：
+```javascript
+vi ~/.git-credentials
+```
+
+如果你问我命令行的怎么修改，抱歉，俺不资道＜（＠￣︶￣＠）＞
+
+*git-config --list*
+
+>查看用户名,分支地址等信息
+
+*git branch --set-upstream-to=origin/分支名*
+
+>本地的某一分支与远程的某一分支建立联系
+
+*git remote show origin*
+
+>当你建立与远程分支的联系后，不确定是与远程哪个有染，就用这个命令
+
+```javascript
+Local branches configured for 'git pull':
+    master  merges with remote master
+    release merges with remote release
+Local refs configured for 'git push':
+    master  pushes to master  (local out of date)
+    release pushes to release (up to date)
+```
+
+
+还发现了一个问题就是：当本地分支名和远程的分支名一样的时候，自动会找到相应的分支？？？
+
+
+
+
 
 
 
