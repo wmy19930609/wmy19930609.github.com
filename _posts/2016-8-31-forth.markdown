@@ -22,6 +22,7 @@ cat ~/.git-credentials
 ```
 
 修改保存的用户名和密码：
+
 ```javascript
 vi ~/.git-credentials
 ```
