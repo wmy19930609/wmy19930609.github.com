@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "git"
+date:   2016-8-31 16:00:00
+categories: git
+---
+今天发工资了<(￣︶￣)>
+
+
+
+
