@@ -1,11 +1,10 @@
 ---
 layout: post
-title:  "心情杂记"
+title:  "心情整理"
 date:   2016-9-11 9:00:00
 categories: mood
 ---
 
-#### 心情整理
 
 附赠一首歌：<http://url.cn/2I0Oe74>
 
